@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //依赖 module api
+    implementation project(':api')
+
+    // 主要作用是注解Processor类，并对其生成META-INF的配置信息，
+    // 可以让你不用去写META-INF这些配置文件，
+    // 只要在自定义的Processor上面加上@AutoService(Processor.class)
+    compile group: 'com.google.auto.service', name: 'auto-service', version: '1.0-rc6'
+
+    //A Java API for generating .java source files.
+    // 可以更方便的生成代码，它可以帮助我们通过类调用的形式来生成代码。
+    compile 'com.squareup:javapoet:1.11.1'
+}
+
+//使用jdk1。7
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
